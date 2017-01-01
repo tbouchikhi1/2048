@@ -18,12 +18,12 @@ class Grille
     void translate_droite();
 
   private:
-    //Méthodes internes
-    void alloc_dyn_grille(int taille);
-    void initial_grille_config();
     int m_taille;
     int m_score;
     int **m_grille;
+    //Méthodes internes
+    void alloc_dyn_grille(int taille);
+    void initial_grille_config();
 };
 
 #endif // GRILLE_H
