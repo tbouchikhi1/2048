@@ -1,25 +1,29 @@
 #ifndef GRILLE_H
 #define GRILLE_H
-#include "case.h"
+#include <iostream>
 #include <vector>
 using namespace std;
 
 class Grille
 {
-    public:
-        Grille(int taille);
-        int get_score();
-        Case get_case(int x, int y);
-        void translate_haut();
-        void translate_bas();
-        void translate_gauche();
-        void translate_droite();
+  public:
+    Grille(int taille);
+    ~Grille();
+    int get_score();
+    int get_case(int x, int y);
+    void afficher_console();
+    void translate_haut();
+    void translate_bas();
+    void translate_gauche();
+    void translate_droite();
 
-
-    private:
-        int m_taille;
-        int m_score;
-        vector<vector<Case>> m_cases;
+  private:
+    //Méthodes internes
+    void alloc_dyn_grille(int taille);
+    void initial_grille_config();
+    int m_taille;
+    int m_score;
+    int **m_grille;
 };
 
 #endif // GRILLE_H
