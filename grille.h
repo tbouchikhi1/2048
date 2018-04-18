@@ -24,6 +24,7 @@ class Grille
     //Méthodes internes
     void alloc_dyn_grille(int taille);
     void initial_grille_config();
+    vector<int> fusion_cases( vector<int> vecteur);
 };
 
 #endif // GRILLE_H
