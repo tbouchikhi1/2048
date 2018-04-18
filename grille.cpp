@@ -4,6 +4,17 @@
 #include <vector>
 
 using namespace std;
+int Grille::taille = 4;
+Grille::Grille(QObject *parent): QObject(parent){
+    m_taille = 4;
+    m_score = 0;
+    alloc_dyn_grille(m_taille);
+    initial_grille_config();
+    grillechanged();
+    scorechanged();
+    couleurschanged();
+}
+
 
 Grille::Grille(int taille)
 {
@@ -149,10 +160,13 @@ void Grille::translate_bas()
     int j = rand() % m_taille;
     while (m_grille[i][j] != 0)
     {
-        int i = rand() % m_taille;
-        int j = rand() % m_taille;
+         i = rand() % m_taille;
+         j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
+    grillechanged();
+    scorechanged();
+    couleurschanged();
     afficher_console();
 }
 
@@ -175,10 +189,13 @@ void Grille::translate_haut()
     int j = rand() % m_taille;
     while (m_grille[i][j] != 0)
     {
-        int i = rand() % m_taille;
-        int j = rand() % m_taille;
+        i = rand() % m_taille;
+        j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
+    grillechanged();
+    scorechanged();
+    couleurschanged();
     afficher_console();
 }
 
@@ -201,10 +218,13 @@ void Grille::translate_droite()
     int j = rand() % m_taille;
     while (m_grille[i][j] != 0)
     {
-        int i = rand() % m_taille;
-        int j = rand() % m_taille;
+        i = rand() % m_taille;
+        j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
+    grillechanged();
+    scorechanged();
+    couleurschanged();
     afficher_console();
 }
 
@@ -227,10 +247,13 @@ void Grille::translate_gauche()
     int j = rand() % m_taille;
     while (m_grille[i][j] != 0)
     {
-        int i = rand() % m_taille;
-        int j = rand() % m_taille;
+        i = rand() % m_taille;
+        j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
+    emit grillechanged();
+    emit scorechanged();
+    emit couleurschanged();
     afficher_console();
 }
 
@@ -258,4 +281,77 @@ bool Grille::a_perdu()
     }else{
         return false;
     }
+}
+
+QList<QString> Grille::getGrille()
+{
+    values.clear();
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
+
+            values.append(QString::number(m_grille[i][j]));
+        }
+    }
+    return values;
+}
+
+QList<QString> Grille::getCouleurs()
+{
+    colors.clear();
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
+            switch (m_grille[i][j])
+            {
+            case 0:
+                colors.append("#eee4da");
+                break;
+            case 2:
+                colors.append("#eee4da");
+                break;
+            case 4:
+                colors.append("#ede0c8");
+                break;
+            case 8:
+                colors.append("#f2b179");
+                break;
+            case 16:
+                colors.append("#f59563");
+                break;
+            case 32:
+                colors.append("#f67c5f");
+                break;
+            case 64:
+                colors.append("#f65e3b");
+                break;
+            case 128:
+                colors.append("#edcf72");
+                break;
+            case 256:
+                colors.append("#edcc61");
+                break;
+            case 512:
+                colors.append("#edc850");
+                break;
+            case 1024:
+                colors.append("#edc53f");
+                break;
+            case 2048:
+                colors.append("#edc22e");
+                break;
+            }
+        }
+    }
+    return colors;
+}
+int Grille::getTaille()
+{
+    return 4;
+}
+QString Grille::getScore()
+{
+    return (QString::number(Grille::m_score));
 }
