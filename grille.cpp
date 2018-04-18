@@ -150,7 +150,7 @@ void Grille::translate_bas()
         {
             vect1[m_taille - 1 - j] = m_grille[j][i];
         }
-
+    vect2 = fusion_cases(vect1);
         for (int j = 0; j < m_taille; j++)
         {
             m_grille[j][i] = vect2[m_taille - 1 - j];
