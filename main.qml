@@ -3,8 +3,8 @@ import QtQuick.Controls 2.2
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 710
+    height: 700
     title: qsTr("2048")
 
     Page1Form {
@@ -16,7 +16,6 @@ ApplicationWindow {
               partieDeJeu.translate_haut();
               break;
             case Qt.Key_Down:
-                console.log('fleche du bas');
               partieDeJeu.translate_bas();
               break;
             case Qt.Key_Left:

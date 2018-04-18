@@ -7,7 +7,8 @@ Item {
     height: 700
     Rectangle {
         id: rect_global
-        color: "#faf8ef"
+        height: 7000
+        color: "#f3efda"
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -60,10 +61,6 @@ Item {
                             focus: true
                             text: partieDeJeu.grille[index]
                         }
-
-                        property int moveAnimTime: 300
-                        property int newTileAnimTime: 600
-                        property bool runNewTileAnim: false
                     }
                 }
             }
@@ -72,7 +69,7 @@ Item {
 
     Rectangle {
         id: score_box
-        x: 286
+        x: 245
         y: 32
         width: 220
         height: 40
@@ -97,9 +94,43 @@ Item {
         }
     }
     Rectangle {
+        id: restart_rectangle
+        x: 482
+        y: 32
+        width: 220
+        height: 40
+        color: "#8c8178"
+        radius: 2
+
+        Text {
+            height: 38
+            text: qsTr("Restart : ")
+            renderType: Text.NativeRendering
+            anchors.fill: parent
+            font.family: "Verdana"
+            verticalAlignment: Text.AlignVCenter
+            visible: true
+            scale: 1
+            wrapMode: Text.NoWrap
+            horizontalAlignment: Text.AlignHCenter
+            textFormat: Text.RichText
+            font.pixelSize: 28
+            font.bold: false
+            color: "#ffffff"
+        }
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            onClicked: {
+                partieDeJeu.alloc_dyn_grille(4)
+            }
+        }
+    }
+
+    Rectangle {
         id: score_container
-        x: 286
-        y: 71
+        x: 245
+        y: 72
         width: 220
         height: 40
         radius: 2

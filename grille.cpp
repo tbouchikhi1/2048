@@ -21,7 +21,7 @@ Grille::Grille(int taille)
     m_taille = taille;
     m_score = 0;
     alloc_dyn_grille(m_taille);
-    initial_grille_config();
+    
 }
 
 Grille::~Grille()
@@ -44,6 +44,11 @@ void Grille::alloc_dyn_grille(int taille)
     {
         m_grille[i] = new int[taille];
     }
+    m_score =0;
+    initial_grille_config();
+    grillechanged();
+    scorechanged();
+    couleurschanged();
 }
 
 void Grille::initial_grille_config()

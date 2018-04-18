@@ -32,7 +32,7 @@ public:
   Q_INVOKABLE void translate_droite();
   Q_INVOKABLE bool a_gagne();
   Q_INVOKABLE bool a_perdu();
-
+  Q_INVOKABLE void alloc_dyn_grille(int taille);
   static int taille;
 
 signals:
@@ -51,7 +51,7 @@ private:
   QList<QString> values;
   QList<QString> colors;
   //Méthodes internes
-  void alloc_dyn_grille(int taille);
+
   void initial_grille_config();
   vector<int> fusion_cases(vector<int> vecteur);
 };
