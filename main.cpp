@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
         return -1;
 
     return app.exec();
-    partie_de_jeu.translate_bas();
-    partie_de_jeu.translate_droite();
+
 
 }
