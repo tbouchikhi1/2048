@@ -16,6 +16,8 @@ class Grille
     void translate_bas();
     void translate_gauche();
     void translate_droite();
+    bool a_gagne();
+    bool a_perdu();
 
   private:
     int m_taille;

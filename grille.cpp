@@ -78,45 +78,53 @@ int Grille::get_case(int x, int y)
     return m_grille[x][y];
 }
 
-vector<int> Grille::fusion_cases(vector<int> vecteur){
+vector<int> Grille::fusion_cases(vector<int> vecteur)
+{
     int taille = vecteur.size();
     vector<int> vect1(taille), vect2(taille);
     int j = 0;
     // Recopie des éléments non nuls de vecteur dans vect2
     //si vect = [2,0,0,4] alors vect1 = [2,4,NULL,NULL]
-    for (int i=0; i < taille; i++){
-        if (vecteur[i] != 0){
+    for (int i = 0; i < taille; i++)
+    {
+        if (vecteur[i] != 0)
+        {
             vect1[j] = vecteur[i];
             j++;
         }
     }
     // Fusion des cases identiques 2 par 2 et recopie dans vect2
-    // gestion du score 
+    // gestion du score
     j = 0;
-    for (int i = 1; i<taille; i++){
-        if (vect1[i-1]==vect1[i]){
-            vect2[j]=2*vect1[i-1];
+    for (int i = 1; i < taille; i++)
+    {
+        if (vect1[i - 1] == vect1[i])
+        {
+            vect2[j] = 2 * vect1[i - 1];
             m_score += vect2[j];
             //Verification qu'on ne vient pas de fusionner deux cases nulles
-            if (vect2[j] != 0){
+            if (vect2[j] != 0)
+            {
                 j++;
             }
         }
 
-        
-        //Si elements non identiques : recopie un à un 
-        else{
-            vect2[j] = vect1[i-1];
+        //Si elements non identiques : recopie un à un
+        else
+        {
+            vect2[j] = vect1[i - 1];
             j++;
         }
     }
     //gestion du dernier élement non géré par la boucle
-    if (vect1[taille - 1] != 0){
-        vect2[j] = vect1[taille -1];
+    if (vect1[taille - 1] != 0)
+    {
+        vect2[j] = vect1[taille - 1];
         j++;
     }
     //Remplissage de 0 dans les autres cases
-    for (int i = j; i<taille; i++){
+    for (int i = j; i < taille; i++)
+    {
         vect2[i] = 0;
     }
     return vect2;
@@ -125,29 +133,24 @@ vector<int> Grille::fusion_cases(vector<int> vecteur){
 void Grille::translate_bas()
 {
     vector<int> vect1(m_taille), vect2(m_taille);
-    for(int i=0; i<m_taille; i++){
-        for(int j =0; j<m_taille; j++){
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
             vect1[m_taille - 1 - j] = m_grille[j][i];
-            
         }
-        cout<<"vect1"<<vect1[0]<<endl;
-        cout<<"vect1"<<vect1[1]<<endl;
-        cout<<"vect1"<<vect1[2]<<endl;
-        cout<<"vect1"<<vect1[3]<<endl;
-        vect2 = fusion_cases(vect1);
-        cout<<"vect2"<<vect2[0]<<endl;
-        cout<<"vect2"<<vect2[1]<<endl;
-        cout<<"vect2"<<vect2[2]<<endl;
-        cout<<"vect2"<<vect2[3]<<endl;
-        for(int j = 0; j< m_taille; j ++){
-            m_grille[j][i] = vect2[m_taille -1 -j];
+
+        for (int j = 0; j < m_taille; j++)
+        {
+            m_grille[j][i] = vect2[m_taille - 1 - j];
         }
     }
-    int i = rand()%m_taille;
-    int j = rand()%m_taille;
-    while(m_grille[i][j] != 0){
-        int i = rand()%m_taille;
-        int j = rand()%m_taille;
+    int i = rand() % m_taille;
+    int j = rand() % m_taille;
+    while (m_grille[i][j] != 0)
+    {
+        int i = rand() % m_taille;
+        int j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
     afficher_console();
@@ -156,20 +159,24 @@ void Grille::translate_bas()
 void Grille::translate_haut()
 {
     vector<int> vect1(m_taille), vect2(m_taille);
-    for(int i=0; i<m_taille; i++){
-        for(int j =0; j<m_taille; j++){
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
             vect1[j] = m_grille[j][i];
         }
         vect2 = fusion_cases(vect1);
-        for(int j = 0; j< m_taille; j ++){
+        for (int j = 0; j < m_taille; j++)
+        {
             m_grille[j][i] = vect2[j];
         }
     }
-    int i = rand()%m_taille;
-    int j = rand()%m_taille;
-    while(m_grille[i][j] != 0){
-        int i = rand()%m_taille;
-        int j = rand()%m_taille;
+    int i = rand() % m_taille;
+    int j = rand() % m_taille;
+    while (m_grille[i][j] != 0)
+    {
+        int i = rand() % m_taille;
+        int j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
     afficher_console();
@@ -178,20 +185,24 @@ void Grille::translate_haut()
 void Grille::translate_droite()
 {
     vector<int> vect1(m_taille), vect2(m_taille);
-    for(int i=0; i<m_taille; i++){
-        for(int j =0; j<m_taille; j++){
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
             vect1[m_taille - 1 - j] = m_grille[i][j];
         }
         vect2 = fusion_cases(vect1);
-        for(int j = 0; j< m_taille; j ++){
-            m_grille[i][j] = vect2[m_taille -1 -j];
+        for (int j = 0; j < m_taille; j++)
+        {
+            m_grille[i][j] = vect2[m_taille - 1 - j];
         }
     }
-    int i = rand()%m_taille;
-    int j = rand()%m_taille;
-    while(m_grille[i][j] != 0){
-        int i = rand()%m_taille;
-        int j = rand()%m_taille;
+    int i = rand() % m_taille;
+    int j = rand() % m_taille;
+    while (m_grille[i][j] != 0)
+    {
+        int i = rand() % m_taille;
+        int j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
     afficher_console();
@@ -200,21 +211,51 @@ void Grille::translate_droite()
 void Grille::translate_gauche()
 {
     vector<int> vect1(m_taille), vect2(m_taille);
-    for(int i=0; i<m_taille; i++){
-        for(int j =0; j<m_taille; j++){
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
             vect1[j] = m_grille[i][j];
         }
         vect2 = fusion_cases(vect1);
-        for(int j = 0; j< m_taille; j ++){
+        for (int j = 0; j < m_taille; j++)
+        {
             m_grille[i][j] = vect2[j];
         }
     }
-    int i = rand()%m_taille;
-    int j = rand()%m_taille;
-    while(m_grille[i][j] != 0){
-        int i = rand()%m_taille;
-        int j = rand()%m_taille;
+    int i = rand() % m_taille;
+    int j = rand() % m_taille;
+    while (m_grille[i][j] != 0)
+    {
+        int i = rand() % m_taille;
+        int j = rand() % m_taille;
     }
     m_grille[i][j] = 2;
     afficher_console();
+}
+
+bool Grille::a_gagne()
+{
+    return m_score == 2048;
+}
+
+bool Grille::a_perdu()
+{
+    int nbre_cases_non_nulles = 0;
+    for (int i = 0; i < m_taille; i++)
+    {
+        for (int j = 0; j < m_taille; j++)
+        {
+            if (m_grille[i][j] != 0)
+            {
+                nbre_cases_non_nulles++;
+            }
+        }
+    }
+    if (nbre_cases_non_nulles == m_taille * m_taille)
+    {
+        return true;
+    }else{
+        return false;
+    }
 }
