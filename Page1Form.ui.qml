@@ -60,7 +60,46 @@ Item {
                             font.pixelSize: 40
                             focus: true
                             text: partieDeJeu.grille[index]
+                                                   visible : {
+                               if (partieDeJeu.grille[index]!=='0')
+                                   return true;
+
+                               else  return false;
+
+                           }
+
+                     Behavior on text {
+                           PropertyAnimation { target: cases
+                               property: "opacity"
+                               from: 0.5
+                               to: 1
+                               duration: 300
+                           }
+                       }
                         }
+
+                        property int moveAnimTime: 300
+                        property int newTileAnimTime: 600
+                        property bool runNewTileAnim: false
+                       ParallelAnimation {
+                               running: runNewTileAnim
+                               NumberAnimation {
+                                   target: cases
+                                   property: "opacity"
+                                   from: 0.0
+                                   to: 1.0
+                                   duration: newTileAnimTime
+                               }
+
+                               ScaleAnimator {
+                                   target: cases
+                                   from: 0
+                                   to: 1
+                                   duration: newTileAnimTime
+                                   easing.type: Easing.OutQuad
+                               }
+                           }
+
                     }
                 }
             }
