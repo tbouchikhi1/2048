@@ -99,8 +99,8 @@ vector<int> Grille::fusion_cases(vector<int> vecteur)
     int taille = vecteur.size();
     vector<int> vect1(taille), vect2(taille);
     int j = 0;
-    // Recopie des éléments non nuls de vecteur dans vect2
-    //si vect = [2,0,0,4] alors vect1 = [2,4,NULL,NULL]
+    // Recopie des éléments non nuls de vecteur dans vect1
+    // si vect = [2,0,0,4] alors vect1 = [2,4,NULL,NULL]
     for (int i = 0; i < taille; i++)
     {
         if (vecteur[i] != 0)
@@ -109,7 +109,7 @@ vector<int> Grille::fusion_cases(vector<int> vecteur)
             j++;
         }
     }
-    // Fusion des cases identiques 2 par 2 et recopie dans vect2
+    // Fusion des cases identiques 2 par 2 et retranscription dans vect2
     // gestion du score
     j = 0;
     for (int i = 1; i < taille; i++)
@@ -123,8 +123,8 @@ vector<int> Grille::fusion_cases(vector<int> vecteur)
             {
                 j++;
             }
+            i++;
         }
-
         //Si elements non identiques : recopie un à un
         else
         {
